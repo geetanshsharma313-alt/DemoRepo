@@ -1,0 +1,40 @@
+<template>
+    <lightning-layout multiple-rows="true">
+        <template for:each={cases} for:item="c">
+            <lightning-layout-item key={c.Id} size="6" padding="around-small">
+                <lightning-card title={c.CaseNumber} icon-name="standard:case">
+                    <!-- Case Details -->
+                    <div class="slds-p-around_small">
+                        <p><b>Subject : </b> {c.Subject} </p>
+                        <p>
+                            <b>Status : </b>
+                            <template if:true={c.IsClosed}>
+                                <lightning-badge label={c.Status} class="slds-theme_success"></lightning-badge>
+                            </template>
+                            <template if:false={c.IsClosed}>
+                                <lightning-badge label={c.Status} class="slds-theme_inverse"></lightning-badge>
+                            </template>
+                        </p>
+                        <p><b>Priority : </b> {c.Priority} </p>
+                    </div>
+
+                    <lightning-button-group slot="actions" class="button-group">
+                        <lightning-button label="Comments" name="comments" variant="brand" if:false={c.IsClosed}
+                            value={c} onclick={handleClick} icon-name="utility:chat" icon-position="right">
+                        </lightning-button>
+                        <template if:false={c.IsEscalated}>
+                            <lightning-button label="Escalate" variant="destructive" if:false={c.IsClosed} value={c}
+                                onclick={handleClick} name="escalate" icon-name="utility:arrowup"
+                                icon-position="right"></lightning-button>
+                        </template>
+                        <lightning-button label="Reopen" variant="brand" if:true={c.IsClosed} value={c}
+                            onclick={handleClick} name="reopen" icon-name="utility:refresh" icon-position="right">
+                        </lightning-button>
+
+                    </lightning-button-group>
+
+                </lightning-card>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+</template>

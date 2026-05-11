@@ -1,0 +1,176 @@
+<template>
+    <lightning-card title="Book Doctor Appointment" icon-name="standard:event">
+        <div class="container">
+
+            <!-- LOADING -->
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-p-around_large">
+                    <lightning-spinner
+                        size="large"
+                        alternative-text="Loading appointment data">
+                    </lightning-spinner>
+                </div>
+            </template>
+
+            <!-- FORM -->
+            <template if:false={isLoading}>
+                <div class="slds-box slds-theme_default form-container">
+
+                   
+                    <template if:true={isStep1}>
+                        <h2 class="section-title">Select Speciality & Doctor</h2>
+
+                        <lightning-combobox
+                            label="Select Speciality"
+                            placeholder="Choose Speciality"
+                            options={specialities}
+                            value={selectedSpeciality}
+                            onchange={handleSpecialityChange}>
+                        </lightning-combobox>
+
+                        <template if:true={doctors.length}>
+                            <div class="doctor-list">
+                                <template for:each={doctors} for:item="doc">
+                                    <div
+                                        key={doc.Id}
+                                        class={doc.cssClass}
+                                        data-id={doc.Id}
+                                        onclick={handleDoctorSelect}>
+                                        <lightning-icon
+                                            icon-name="standard:person"
+                                            size="small">
+                                        </lightning-icon>
+
+                                        <div class="doctor-info">
+                                            <h3>{doc.Name}</h3>
+                                            <div class="department">
+                                                {doc.Speciality__c}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+
+                       
+                        <div class="button-group">
+                            <lightning-button
+                                label="Next"
+                                variant="brand"
+                                disabled={isStep1Disabled}
+                                onclick={goToStep2}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    
+                    <template if:true={isStep2}>
+                        <h2 class="section-title">Choose Date & Time</h2>
+
+                        <lightning-input
+                            type="date"
+                            label="Appointment Date"
+                            value={appointmentDate}
+                            min={minDate}
+                            max={maxDate}
+                            onchange={handleDateChange}>
+                        </lightning-input>
+
+                        <template if:true={showTimeSlots}>
+                            <div class="time-slots-grid">
+                                <template
+                                    for:each={availableSlots}
+                                    for:item="slot"
+                                    for:index="index">
+                                    <button
+                                        key={slot.displayTime}
+                                        class={slot.cssClass}
+                                        data-index={index}
+                                        disabled={slot.disabled}
+                                        onclick={handleTimeSlotSelect}>
+                                        {slot.displayTime}
+                                    </button>
+                                </template>
+                            </div>
+                        </template>
+
+                        <lightning-textarea
+                            label="Symptoms"
+                            value={symptoms}
+                            onchange={handleSymptomsChange}>
+                        </lightning-textarea>
+
+                       
+                        <div class="button-group">
+                            <lightning-button
+                                label="Back"
+                                onclick={goBackToStep1}>
+                            </lightning-button>
+
+                            <lightning-button
+                                label="Next"
+                                variant="brand"
+                                disabled={isStep2Disabled}
+                                onclick={goToStep3}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    
+                    <template if:true={isStep3}>
+                        <h2 class="section-title">Confirm Appointment</h2>
+
+                        <div class="confirmation-box">
+                            <div class="confirmation-item">
+                                <span class="label">Speciality</span>
+                                <span>{selectedSpeciality}</span>
+                            </div>
+
+                            <div class="confirmation-item">
+                                <span class="label">Doctor</span>
+                                <span>{selectedDoctorName}</span>
+                            </div>
+
+                            <div class="confirmation-item">
+                                <span class="label">Date</span>
+                                <span>{appointmentDate}</span>
+                            </div>
+
+                            <div class="confirmation-item">
+                                <span class="label">Time</span>
+                                <span>{selectedTimeDisplay}</span>
+                            </div>
+
+                            <div class="confirmation-item">
+                                <span class="label">Symptoms</span>
+                                <span>{symptoms}</span>
+                            </div>
+                        </div>
+
+                       
+                        <div class="button-group">
+                            <lightning-button
+                                label="Back"
+                                onclick={goBackToStep2}>
+                            </lightning-button>
+
+                            <lightning-button
+                                label="Confirm Booking"
+                                variant="success"
+                                onclick={handleConfirmBooking}>
+                            </lightning-button>
+                        </div>
+                    </template>
+
+                    
+                    <template if:true={errorMessage}>
+                        <div class="error-message">
+                            {errorMessage}
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

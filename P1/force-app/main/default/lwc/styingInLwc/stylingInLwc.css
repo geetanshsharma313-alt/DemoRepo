@@ -1,0 +1,12 @@
+p{
+    color: red;
+    font-size: 20px;
+}
+.user{
+    color: pink;
+    font-size: 20px;
+}
+.user:hover{
+    color: blue;
+    font-size: 20px;
+}

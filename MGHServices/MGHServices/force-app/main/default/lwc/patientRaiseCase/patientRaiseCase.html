@@ -1,0 +1,50 @@
+<template>
+    <lightning-card title="Raise a Case">
+        <div class="slds-p-around_medium">
+
+            <!-- Appointment -->
+            <lightning-combobox
+                label="Related Appointment"
+                value={selectedAppointment}
+                options={appointmentOptions}
+                onchange={handleAppointmentChange}>
+            </lightning-combobox>
+
+            <!-- Provider -->
+            <lightning-combobox
+                label="Provider"
+                value={providerId}
+                options={providerOptions}
+                onchange={handleProviderChange}>
+            </lightning-combobox>
+
+            <!-- Problem -->
+            <lightning-combobox
+                label="Problem Related To"
+                value={problemRelatedTo}
+                options={problemOptions}
+                onchange={handleProblemChange}>
+            </lightning-combobox>
+
+            <lightning-input
+                label="Subject"
+                value={subject}
+                onchange={handleSubjectChange}>
+            </lightning-input>
+
+            <lightning-textarea
+                label="Description"
+                value={description}
+                onchange={handleDescriptionChange}>
+            </lightning-textarea>
+
+            <lightning-button
+                label="Submit Case"
+                variant="brand"
+                onclick={handleSubmit}
+                class="slds-m-top_medium">
+            </lightning-button>
+
+        </div>
+    </lightning-card>
+</template>

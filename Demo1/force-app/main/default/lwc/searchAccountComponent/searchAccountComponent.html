@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Search Account">
+          <lightning-input>
+            label = "Search Account"
+            value = {SearchKey}
+            onChange = {handleChange}
+          </lightning-input>
+
+          <lightning-button>
+            label ="Search Here"
+            onClick = {handleSave}
+          </lightning-button>
+
+          <template if:true={accounts}>
+            <template for:each={accounts} for:item="acc">
+                <p key={acc.Id}>
+                    {acc.Name} - {acc.Industry} - {acc.Phone}
+                </p>
+            </template>
+        </template>
+
+    </lightning-card>
+</template>

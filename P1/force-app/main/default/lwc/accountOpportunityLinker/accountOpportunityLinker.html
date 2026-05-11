@@ -1,0 +1,73 @@
+<template>
+    <div class="wrapper">
+
+        <!-- HEADER -->
+        <h1 class="title">Accounts & Opportunities</h1>
+
+        <!-- BUTTONS -->
+        <div class="top-actions">
+            <button class="outline-btn" onclick={createAccount}>
+                Add Account
+            </button>
+
+            <button class="outline-btn primary" onclick={createOpportunity}>
+                Add Opportunity
+            </button>
+        </div>
+
+        <!-- ACCOUNTS -->
+        <div class="section">
+            <p class="section-title">All Accounts</p>
+
+            <input
+                class="search"
+                placeholder="Search Account"
+                oninput={handleAccountSearch}
+            />
+
+            <div class="cards">
+                <template for:each={accounts} for:item="acc">
+                    <div key={acc.Id}
+                         class={acc.cssClass}
+                         data-id={acc.Id}
+                         onclick={selectAccount}>
+                        <p class="name">{acc.Name}</p>
+                        <p class="sub">Total Opps: {acc.opportunityCount}</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- OPPORTUNITIES -->
+        <div class="section">
+            <p class="section-title">All Opportunities</p>
+
+            <input
+                class="search"
+                placeholder="Search Opportunity"
+                oninput={handleOppSearch}
+            />
+
+            <div class="cards">
+                <template for:each={opportunities} for:item="opp">
+                    <div key={opp.Id}
+                         class="card"
+                         data-id={opp.Id}
+                         onclick={selectOpportunity}>
+                        <p class="name">{opp.Name}</p>
+                        <p class="sub">
+                            Account: {opp.accountName}
+                        </p>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <button class="ghost" onclick={cancel}>Cancel</button>
+            <button class="primary" onclick={save}>Save</button>
+        </div>
+
+    </div>
+</template>

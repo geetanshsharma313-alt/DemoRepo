@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Conditional Rendering">
+        <div class="slds-m-around_medium">
+            <lightning-button variant="brand" label="Click Here" title="Click Here" 
+            onclick={handleClick} class="slds-m-left_x-medium"></lightning-button>
+           <template if:true={isVisible}>   
+             <div>Yess , your are good in Studies</div>
+           </template>
+
+           <lightning-input type="text" 
+           label="Type here" 
+           onkeyup={changeHandler}>
+           </lightning-input>
+           <template if:true={helloMethod}>
+                 <div>Hurray !!! you typed correctly</div>
+           </template>
+
+
+        </div>
+    </lightning-card>
+    
+</template>

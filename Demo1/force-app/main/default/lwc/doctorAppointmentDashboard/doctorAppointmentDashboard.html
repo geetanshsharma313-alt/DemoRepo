@@ -1,0 +1,168 @@
+<template>
+    <section class="dashboard">
+
+        <!-- ================= HEADER ================= -->
+        <div class="header">
+            <div>
+                <h1>Upcoming Appointments</h1>
+                <p>Manage your scheduled patient appointments</p>
+            </div>
+            <lightning-button
+                label="Refresh"
+                icon-name="utility:refresh"
+                onclick={handleRefresh}>
+            </lightning-button>
+        </div>
+
+        <!-- ================= FILTERS ================= -->
+        <div class="filters">
+            <lightning-input
+                type="search"
+                label="Search"
+                placeholder="Patient name or Appointment #"
+                onchange={handleSearchChange}>
+            </lightning-input>
+
+            <lightning-combobox
+                label="Status"
+                value={statusFilter}
+                options={statusOptions}
+                onchange={handleStatusFilterChange}>
+            </lightning-combobox>
+        </div>
+
+        <!-- ================= LOADER ================= -->
+        <template if:true={isLoading}>
+            <lightning-spinner size="large"></lightning-spinner>
+        </template>
+
+        <!-- ================= EMPTY ================= -->
+        <template if:true={hasNoAppointments}>
+            <div class="empty">
+                <lightning-icon
+                    icon-name="utility:event"
+                    size="large">
+                </lightning-icon>
+                <p>No appointments found</p>
+            </div>
+        </template>
+
+        <!-- ================= GRID ================= -->
+        <template if:false={hasNoAppointments}>
+            <div class="appointments-grid">
+                <template for:each={filteredAppointments} for:item="apt">
+                    <div key={apt.appointmentId} class="card">
+
+                        <!-- Card Header -->
+                        <div class="card-header">
+                            <div>
+                                <div class="patient-name">
+                                    {apt.patientName}
+                                </div>
+                                <div class="appointment-number">
+                                    #{apt.appointmentNumber}
+                                </div>
+                            </div>
+                            <span class={apt.statusBadgeClass}>
+                                {apt.status}
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <p>
+                                <lightning-icon icon-name="utility:event" size="x-small"></lightning-icon>
+                                {apt.formattedDate}
+                            </p>
+                            <p>
+                                <lightning-icon icon-name="utility:clock" size="x-small"></lightning-icon>
+                                {apt.formattedTime}
+                            </p>
+                            <p>
+                                <lightning-icon icon-name="utility:email" size="x-small"></lightning-icon>
+                                {apt.patientEmail}
+                            </p>
+                            <p>
+                                <lightning-icon icon-name="utility:call" size="x-small"></lightning-icon>
+                                {apt.patientPhone}
+                            </p>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="card-footer">
+                            <lightning-button
+                                label="View"
+                                variant="neutral"
+                                data-id={apt.appointmentId}
+                                onclick={handleView}>
+                            </lightning-button>
+
+                            <div class="status-dropdown">
+                                <span class="status-label">Update Status</span>
+                                <lightning-combobox
+                                    value={apt.status}
+                                    data-id={apt.appointmentId}
+                                    options={updateStatusOptions}
+                                    onchange={handleStatusDraft}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- ================= MODAL ================= -->
+        <template if:true={showModal}>
+            <section class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container modal-container">
+
+                    <header class="slds-modal__header">
+                        <h2>Appointment Details</h2>
+                    </header>
+
+                    <div class="slds-modal__content modal-body">
+
+                        <!-- Patient Info Card -->
+                        <div class="info-card">
+                            <span class="info-label">Patient</span>
+                            <span class="info-value">
+                                {selectedAppointment.patientName}
+                            </span>
+                        </div>
+
+                        <!-- Status Update -->
+                        <div class="status-section">
+                            <span class="info-label">New Status</span>
+                            <lightning-combobox
+                                class="status-combobox"
+                                value={draftStatus}
+                                options={updateStatusOptions}
+                                onchange={handleModalStatusChange}>
+                            </lightning-combobox>
+                        </div>
+
+                    </div>
+
+                    <footer class="slds-modal__footer modal-footer">
+                        <lightning-button
+                            label="Cancel"
+                            variant="neutral"
+                            onclick={closeModal}>
+                        </lightning-button>
+
+                        <lightning-button
+                            label="Save"
+                            variant="brand"
+                            onclick={handleSaveStatus}>
+                        </lightning-button>
+                    </footer>
+
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </section>
+</template>

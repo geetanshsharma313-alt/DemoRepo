@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Looping">
+        <div class="slds-m-around_medium">
+            <template for:each={carList} for:item='car'>
+
+                <ul class="slds-has-dividers_top-space" key={car}>
+                    <li class="slds-item">{car}</li>
+
+                </ul>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

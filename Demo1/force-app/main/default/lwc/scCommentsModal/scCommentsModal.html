@@ -1,0 +1,34 @@
+<template>
+
+    <lightning-modal-header label="Case Comments"></lightning-modal-header>
+
+    <lightning-modal-body>
+
+        <template if:true={showSpinner}>
+            <lightning-spinner variant="brand" size="large"></lightning-spinner>
+        </template>
+
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="8" padding="around-small">
+                <lightning-textarea value={commentBody} variant="label-hidden" name="comment"
+                    placeholder="Enter Comment" onchange={handleChange}></lightning-textarea>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <lightning-button label="Post Comment" variant="brand" class="slds-align_absolute-center"
+                    name="newcomment" onclick={handleClick} icon-name="utility:add"
+                    icon-position="right"></lightning-button>
+            </lightning-layout-item>
+            <template if:true={content.CaseComments}>
+                <template for:each={content.CaseComments} for:item="cc">
+                    <lightning-layout-item key={cc.Id} size="8" padding="around-small">
+                        <lightning-textarea value={cc.CommentBody} variant="label-hidden"
+                            read-only="true"></lightning-textarea>
+                    </lightning-layout-item>
+                    <lightning-layout-item key={cc.Id} size="4" padding="around-small">
+                        {cc.CreatedBy.Name}
+                    </lightning-layout-item>
+                </template>
+            </template>
+        </lightning-layout>
+    </lightning-modal-body>
+</template>

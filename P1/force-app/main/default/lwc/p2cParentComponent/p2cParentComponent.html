@@ -1,0 +1,32 @@
+<template>
+   <!-- <c-p2c-alert-component
+    message="Hurray !! I got the data"
+    card-heading="Parent to Child primitive data communication"
+    number=20
+    is-valid
+    </c-p2c-alert-component> -->
+
+    <!-- <div class="slds-var-m-bottom_medium"></div> -->
+    <!-- <c-p2c-carousel-component carousel-details={carouselData}></c-p2c-carousel-component> -->
+
+    <lightning-card> 
+        <div class="slds-m-around_medium"> 
+            <lightning-input type="number" label="Enter Value" 
+            value = {percentage} 
+            onkeyup = {handleClick}></lightning-input>
+            <c-progress-component progress = {percentage}></c-progress-component>
+        </div>
+
+    </lightning-card>   
+    
+    <lightning-card> 
+        <div class="slds-m-around_medium"> 
+         <lightning-button variant="brand" label="Reset Slider"
+         onclick={handleButton}></lightning-button>
+
+        <c-slider-component ></c-slider-component>
+  
+        </div>
+
+    </lightning-card>   
+</template>

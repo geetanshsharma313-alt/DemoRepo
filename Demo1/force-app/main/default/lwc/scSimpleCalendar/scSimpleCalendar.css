@@ -1,0 +1,213 @@
+/* ===================== GLOBAL CONTAINER ===================== */
+.container {
+    padding: 2.5rem 1.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Main form box */
+.form-container {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* ===================== STEPPER ===================== */
+.step-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 0.85rem;
+}
+
+.step.active {
+    color: #0e7490;
+    font-weight: 600;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e0f2fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.step.active .step-number {
+    background: #0e7490;
+    color: white;
+}
+
+.step-line {
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(to right, #bae6fd, #e2e8f0);
+    margin: 0 0.75rem;
+}
+
+/* ===================== SECTION TITLES ===================== */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 1rem;
+}
+
+.subsection-title {
+    margin-top: 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+/* ===================== DOCTOR CARDS ===================== */
+.doctor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;                 /* 🔥 spacing between cards */
+    margin-top: 1.75rem;
+    margin-bottom: 2.5rem;
+}
+
+.doctor-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.doctor-card:hover {
+    border-color: #38bdf8;
+    box-shadow: 0 8px 20px rgba(14, 116, 144, 0.15);
+    transform: translateY(-2px);
+}
+
+.doctor-card.selected {
+    border-color: #0e7490;
+    background: #f0f9ff;
+}
+
+.doctor-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.department {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* ===================== TIME SLOTS ===================== */
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.9rem;
+    margin-top: 1.25rem;
+}
+
+.time-slot {
+    padding: 0.65rem;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-weight: 500;
+}
+
+.time-slot:hover {
+    border-color: #38bdf8;
+    background: #f0f9ff;
+}
+
+.time-slot.selected {
+    background: #0e7490;
+    color: white;
+    border-color: #0e7490;
+}
+
+.time-slot:disabled {
+    background: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* ===================== CONFIRMATION ===================== */
+.confirmation-box {
+    background: #f8fafc;
+    padding: 1.75rem;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+}
+
+.confirmation-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.9rem;
+}
+
+.confirmation-item .label {
+    font-weight: 600;
+    color: #475569;
+}
+
+/* ===================== BUTTON GROUP ===================== */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+    gap: 1rem; /* 👈 space between Back & Confirm Booking */
+    margin-top: 1.5rem; /* space above buttons */
+}
+
+/* ===================== SUCCESS & ERROR ===================== */
+.success-message {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+}
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #b91c1c;
+    margin-top: 1.25rem;
+    background: #fef2f2;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+}
+
+/* ===================== RESPONSIVE TWEAKS ===================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .step-indicator {
+        margin-bottom: 2rem;
+    }
+}

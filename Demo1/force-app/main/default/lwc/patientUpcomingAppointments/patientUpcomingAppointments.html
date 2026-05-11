@@ -1,0 +1,57 @@
+<template>
+    <lightning-card
+        title="My Upcoming Appointments"
+        icon-name="standard:event">
+
+        <template if:true={isLoading}>
+            <div class="slds-p-around_medium slds-align_absolute-center">
+                <lightning-spinner size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <template if:true={hasAppointments}>
+                <div class="slds-p-around_medium">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                        <thead>
+                            <tr>
+                                <th>Doctor</th>
+                                <th>Speciality</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template for:each={appointments} for:item="appt">
+                                <tr key={appt.id}>
+                                    <td>{appt.doctorName}</td>
+                                    <td>{appt.speciality}</td>
+                                    <td>{appt.date}</td>
+                                    <td>{appt.time}</td>
+                                    <td>
+                                        <lightning-badge
+                                            label={appt.status}>
+                                        </lightning-badge>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+
+            <template if:false={hasAppointments}>
+                <div class="slds-p-around_medium slds-text-align_center">
+                    No upcoming appointments found.
+                </div>
+            </template>
+
+            <template if:true={errorMessage}>
+                <div class="slds-text-color_error slds-p-around_medium">
+                    {errorMessage}
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,56 @@
+<template>
+    <lightning-modal-header label="Create Case"></lightning-modal-header>
+
+    <template if:true={showSpinner}>
+        <lightning-spinner variant="brand" size="large"></lightning-spinner>
+    </template>
+
+    <lightning-modal-body>
+
+        <lightning-layout multiple-rows="true">
+
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-record-edit-form record-type-id={recordTypeId} onload={handleLoad}
+                    object-api-name={caseObjName} onsubmit={handleSubmit}>
+
+                    <lightning-layout multiple-rows="true">
+
+                        <lightning-layout-item size="12" padding="around-small">
+                            <lightning-input-field required="true" field-name="Subject">
+                            </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input-field field-name="Language__c">
+                            </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="6" padding="around-small">
+                            <lightning-input-field field-name="Region__c">
+                            </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" padding="around-small">
+                            <lightning-input-field field-name="Priority">
+                            </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" padding="around-small">
+                            <lightning-input-field field-name="Description">
+                            </lightning-input-field>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item class="slds-align_absolute-center" size="12" padding="around-small">
+                            <lightning-button type="submit" variant="brand" label="Create" icon-name="utility:check"
+                                icon-position="right"></lightning-button>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+
+                </lightning-record-edit-form>
+            </lightning-layout-item>
+        </lightning-layout>
+
+    </lightning-modal-body>
+
+</template>

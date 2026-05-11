@@ -1,0 +1,45 @@
+<template>
+
+<lightning-card title="Raise Support Case">
+
+<div class="slds-p-around_medium">
+
+<lightning-combobox
+label="Problem Related To"
+value={problemRelatedTo}
+options={problemOptions}
+onchange={handleProblemChange}>
+</lightning-combobox>
+
+<lightning-combobox
+label="Select Appointment"
+value={appointmentId}
+options={appointmentOptions}
+onchange={handleAppointmentChange}>
+</lightning-combobox>
+
+<lightning-input
+label="Subject"
+value={subject}
+onchange={handleSubject}>
+</lightning-input>
+
+<lightning-textarea
+label="Description"
+value={description}
+onchange={handleDescription}>
+</lightning-textarea>
+
+<br/>
+
+<lightning-button
+variant="brand"
+label="Create Case"
+onclick={createCase}>
+</lightning-button>
+
+</div>
+
+</lightning-card>
+
+</template>
