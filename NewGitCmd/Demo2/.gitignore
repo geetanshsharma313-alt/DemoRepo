@@ -46,9 +46,3 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
-.sfdx
-.vscode
-node_modules
-coverage
-.env
-.DS_Store
